@@ -14,9 +14,6 @@ import pl.edu.pollub.yals.repositories.UserRepository
 @EnableWebFlux
 class YetAnotherLectureShedulerApplication(val userRepository: UserRepository) : CommandLineRunner {
     override fun run(vararg args: String?) {
-        userRepository.save(User("e"))
-        userRepository.save(User("f"))
-        userRepository.findAll().forEach({ print(it) })
     }
 }
 
