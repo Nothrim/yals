@@ -6,6 +6,7 @@ spring:
       idle-timeout: 10000
       maximum-pool-size: 4
 
+
 ---
 spring:
   profiles: dev
@@ -24,3 +25,5 @@ spring:
     hibernate:
       ddl-auto: none
     generate-ddl: false
+server:
+  port: $PORT
