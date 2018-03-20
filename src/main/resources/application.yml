@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 0@pT#$JOltk!=l;a
+    url: jdbc:postgresql://localhost:5432/yals
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 4
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
