@@ -11,6 +11,7 @@ import pl.edu.pollub.yals.repositories.UserRepository
 
 
 //https://git.heroku.com/yals-app.git -heroku git deploy
+//localhost:5432 - localhost db
 @SpringBootApplication
 @EnableWebFlux
 class YetAnotherLectureShedulerApplication(val userRepository: UserRepository) : CommandLineRunner {
