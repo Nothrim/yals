@@ -9,6 +9,8 @@ import org.springframework.web.reactive.config.EnableWebFlux
 import pl.edu.pollub.yals.models.database.User
 import pl.edu.pollub.yals.repositories.UserRepository
 
+
+//https://git.heroku.com/yals-app.git -heroku git deploy
 @SpringBootApplication
 @EnableWebFlux
 class YetAnotherLectureShedulerApplication(val userRepository: UserRepository) : CommandLineRunner {
