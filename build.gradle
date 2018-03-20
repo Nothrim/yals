@@ -1,3 +1,4 @@
+
 buildscript {
 	ext {
 		kotlinVersion = '1.2.30'
@@ -40,10 +41,10 @@ repositories {
 	maven { url "https://repo.spring.io/milestone" }
 }
 
-
 ext {
 	springCloudVersion = 'Finchley.M8'
 }
+
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
@@ -63,7 +64,7 @@ dependencies {
 	compile('org.springframework.retry:spring-retry')
 	compile('org.springframework.session:spring-session-core')
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	compile("org.jetbrains.kotlin:kotlin-reflect")
+	compile("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 	compile (group: 'com.zaxxer', name: 'HikariCP', version: '2.7.8')
 	compile('javax.xml.bind:jaxb-api:2.3.0')
 	runtime('org.springframework.boot:spring-boot-devtools')

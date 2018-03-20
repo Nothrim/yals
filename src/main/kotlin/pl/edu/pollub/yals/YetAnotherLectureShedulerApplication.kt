@@ -1,10 +1,8 @@
 package pl.edu.pollub.yals
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
 import org.springframework.web.reactive.config.EnableWebFlux
 import pl.edu.pollub.yals.models.database.User
 import pl.edu.pollub.yals.repositories.UserRepository
@@ -18,7 +16,7 @@ class YetAnotherLectureShedulerApplication(val userRepository: UserRepository) :
     override fun run(vararg args: String?) {
         userRepository.save(User("e"))
         userRepository.save(User("f"))
-        userRepository.findAll().forEach({ print(it)})
+        userRepository.findAll().forEach({ print(it) })
     }
 }
 
