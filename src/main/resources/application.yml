@@ -25,3 +25,5 @@ spring:
     hibernate:
       ddl-auto: none
     generate-ddl: false
+server:
+  port: ${PORT:8080}
