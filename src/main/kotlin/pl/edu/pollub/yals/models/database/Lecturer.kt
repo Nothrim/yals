@@ -8,6 +8,6 @@ data class Lecturer(
         , val name: String
         , val surname: String
         , val state: String
-        , @ManyToOne(fetch=FetchType.LAZY)
+        , @ManyToOne
         var company:Company?
 )

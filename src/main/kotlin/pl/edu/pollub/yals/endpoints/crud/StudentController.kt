@@ -8,16 +8,16 @@ import java.util.*
 
 @RestController
 class StudentController(val studentRepository: StudentRepository) {
-    @GetMapping("/api/private/interestedStudents")
+    @GetMapping("/api/private/students")
     fun listStudents() = studentRepository.findAll()
 
-    @GetMapping("/api/private/interestedStudents/{id}")
+    @GetMapping("/api/private/students/{id}")
     fun getStudent(@PathVariable id: Long) = studentRepository.findById(id)
 
-    @PostMapping("/api/private/interestedStudents")
+    @PostMapping("/api/private/students")
     fun saveStudent(@RequestBody student: Student) = studentRepository.save(student)
 
-    @PutMapping("/api/private/interestedStudents/{id}")
+    @PutMapping("/api/private/students/{id}")
     fun putLecturer(@RequestBody student: Student, @PathVariable id: Long) {
         studentRepository.findById(id)
                 .flatMap { Optional.of(studentRepository.save(Student(it.Id, student.name, student.surname,
@@ -25,7 +25,7 @@ class StudentController(val studentRepository: StudentRepository) {
                         .active,student.state))) }
     }
 
-    @DeleteMapping("/api/private/interestedStudents/{id}")
+    @DeleteMapping("/api/private/students/{id}")
     fun removeLecturer(@PathVariable id: Long) = studentRepository.deleteById(id)
 
 }
