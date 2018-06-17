@@ -7,9 +7,15 @@ import reactor.core.publisher.Mono
 
 @Controller
 class TestHandler {
-    @GetMapping("/hello")
+    @GetMapping("/api/public/hello")
     @ResponseBody
     fun handle(): Mono<String> {
         return Mono.just("Hello")
+    }
+
+    @GetMapping("/api/private/hello")
+    @ResponseBody
+    fun handlePrivate(): Mono<String> {
+        return Mono.just("Hello user!")
     }
 }

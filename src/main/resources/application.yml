@@ -10,6 +10,8 @@ spring:
 ---
 spring:
   profiles: dev
+#  data.mongodb:
+#    uri: mongodb://localhost:27017/yals
   datasource:
     username: postgres
     password: 0@pT#$JOltk!=l;a
