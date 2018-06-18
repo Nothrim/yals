@@ -30,7 +30,10 @@ class YetAnotherLectureShedulerApplication(val companyRepository: CompanyReposit
         val s1 =studentRepository.save(Student(name = "John",surname = "John",indexNumber = "0001",educationYear = 1,semester = 2,field = "IT",active = true,state = "active"))
         val s2=studentRepository.save(Student(name = "Adam",surname = "John",indexNumber = "0002",educationYear = 1,semester = 2,field = "IT",active = true,state = "active"))
         val s3=studentRepository.save(Student(name = "Victoria",surname = "Copperfield",indexNumber = "0003",educationYear = 2,semester = 2,field = "IT",active = true,state = "active"))
-        lectureRepository.save(Lecture(name = "Angular", studentLimit = 30,interestedStudents = setOf(s1,s2,s3)))
+        val l  =Lecture(name = "Angular", studentLimit = 30)
+        l.interestedStudents.addAll(listOf(s1,s2,s3))
+        lectureRepository.save(l)
+        lectureRepository.save(Lecture(name = "Math", studentLimit = 30))
     }
 }
 

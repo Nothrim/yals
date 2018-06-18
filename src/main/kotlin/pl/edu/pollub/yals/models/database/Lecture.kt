@@ -1,33 +1,37 @@
 package pl.edu.pollub.yals.models.database
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonManagedReference
-import java.sql.Time
-import java.util.*
+import org.springframework.format.annotation.DateTimeFormat
+import java.time.LocalDateTime
 import javax.persistence.*
-import kotlin.collections.HashSet
 
 @Entity
-class Lecture(
+data class Lecture(
         @Id @GeneratedValue val Id: Long = -1
         , val name: String = ""
-        , val date: Date = Date()
-        , val time: Time = Time(System.currentTimeMillis())
+        , @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+        val date: LocalDateTime = LocalDateTime.now()
         , var confirmed: Boolean = false
         , val state: String = "active"
-        , val validPresent: Long = System.currentTimeMillis() + 30000
-        , val studentLimit: Long = -1
         ,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS") val presenceCheck: LocalDateTime = LocalDateTime.now().plusMinutes(30)
+        , val studentLimit: Long = -1
+){
+
         @JsonManagedReference
-        @ManyToMany(cascade = [(CascadeType.ALL)],fetch = FetchType.EAGER)
+        @ManyToMany(cascade = [(CascadeType.ALL)], fetch = FetchType.EAGER)
         @JoinTable(name = "interested_students",
                 joinColumns = [(JoinColumn(name = "lecture_id", referencedColumnName = "id"))],
                 inverseJoinColumns = [(JoinColumn(name = "student_id", referencedColumnName = "id"))])
-        val interestedStudents: Set<Student> = HashSet()
-        ,
+        val interestedStudents: MutableSet<Student> = mutableSetOf()
+
         @JsonManagedReference
-        @ManyToMany(cascade = [(CascadeType.ALL)],fetch = FetchType.EAGER)
+        @ManyToMany(cascade = [(CascadeType.ALL)], fetch = FetchType.EAGER)
         @JoinTable(name = "present_students",
                 joinColumns = [(JoinColumn(name = "lecture_id", referencedColumnName = "id"))],
                 inverseJoinColumns = [(JoinColumn(name = "student_id", referencedColumnName = "id"))])
-        val presentStudents: Set<Student> = HashSet()
-)
+        val presentStudents: MutableSet<Student> = mutableSetOf()
+}
