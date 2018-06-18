@@ -1,5 +1,6 @@
 package pl.edu.pollub.yals.models.database
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.sql.Time
 import java.util.*
 import javax.persistence.*
@@ -12,15 +13,19 @@ class Lecture(
         , val date: Date = Date()
         , val time: Time = Time(System.currentTimeMillis())
         , var confirmed: Boolean = false
-        , val state: String = ""
+        , val state: String = "active"
         , val validPresent: Long = System.currentTimeMillis() + 30000
         , val studentLimit: Long = -1
-        , @ManyToMany(cascade = [(CascadeType.ALL)])
+        ,
+        @JsonManagedReference
+        @ManyToMany(cascade = [(CascadeType.ALL)],fetch = FetchType.EAGER)
         @JoinTable(name = "interested_students",
                 joinColumns = [(JoinColumn(name = "lecture_id", referencedColumnName = "id"))],
                 inverseJoinColumns = [(JoinColumn(name = "student_id", referencedColumnName = "id"))])
         val interestedStudents: Set<Student> = HashSet()
-        , @ManyToMany(cascade = [(CascadeType.ALL)])
+        ,
+        @JsonManagedReference
+        @ManyToMany(cascade = [(CascadeType.ALL)],fetch = FetchType.EAGER)
         @JoinTable(name = "present_students",
                 joinColumns = [(JoinColumn(name = "lecture_id", referencedColumnName = "id"))],
                 inverseJoinColumns = [(JoinColumn(name = "student_id", referencedColumnName = "id"))])

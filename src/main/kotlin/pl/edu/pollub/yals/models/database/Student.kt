@@ -1,23 +1,24 @@
 package pl.edu.pollub.yals.models.database
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.ManyToMany
+import com.fasterxml.jackson.annotation.JsonBackReference
+import javax.persistence.*
 
 @Entity
 data class Student(
         @Id @GeneratedValue val Id: Long = -1
-        , val name: String
-        , val surname: String
-        , val indexNumber: String
-        , val educationYear: Int
-        , val semester: Int
-        , val field: String
-        , val active: Boolean
-        , val state: String
-        , @ManyToMany(mappedBy = "interestedStudents")
+        , val name: String =""
+        , val surname: String=""
+        , val indexNumber: String =""
+        , val educationYear: Int=-1
+        , val semester: Int=-1
+        , val field: String=""
+        , val active: Boolean=true
+        , val state: String="active"
+        ,
+        @JsonBackReference
+        @ManyToMany(mappedBy = "interestedStudents",fetch = FetchType.EAGER)
         var lecturesIsInterestedIn: Set<Lecture> = HashSet()
-        , @ManyToMany(mappedBy = "presentStudents")
+        ,@JsonBackReference
+        @ManyToMany(mappedBy = "presentStudents",fetch = FetchType.EAGER)
         var lecturesPresentAt: Set<Lecture> = HashSet()
 )
