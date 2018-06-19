@@ -13,4 +13,7 @@ data class Lecturer(
         @JsonBackReference
         @ManyToOne(cascade = [CascadeType.ALL])
         var company: Company? = null
+        , @JsonBackReference
+        @ManyToMany(mappedBy = "lecturers", fetch = FetchType.EAGER)
+        var assignedLectures: MutableSet<Lecture> = mutableSetOf()
 )

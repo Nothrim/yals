@@ -12,7 +12,7 @@ class LectureService(val lectureRepository: LectureRepository) {
             throw LectureNotConfirmedException("${lecture.name} is not yet confirmed")
         }
         if (lecture.interestedStudents.count() < lecture.studentLimit) {
-            lecture.interestedStudents.toMutableSet().add(student)
+            lecture.interestedStudents.add(student)
             lectureRepository.save(lecture)
         } else {
             throw LectureIsFullException("Unable to assign additional interestedStudents for lecture lecture size limit is " +

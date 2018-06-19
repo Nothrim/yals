@@ -14,11 +14,12 @@ data class Student(
         , val field: String=""
         , val active: Boolean=true
         , val state: String="active"
+        ,val idToken:String = ""
         ,
         @JsonBackReference
         @ManyToMany(mappedBy = "interestedStudents",fetch = FetchType.EAGER)
-        var lecturesIsInterestedIn: Set<Lecture> = HashSet()
+        var lecturesIsInterestedIn: MutableSet<Lecture> = mutableSetOf()
         ,@JsonBackReference
         @ManyToMany(mappedBy = "presentStudents",fetch = FetchType.EAGER)
-        var lecturesPresentAt: Set<Lecture> = HashSet()
+        var lecturesPresentAt: MutableSet<Lecture> = mutableSetOf()
 )

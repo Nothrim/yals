@@ -8,8 +8,9 @@ data class Company(
         @Id @GeneratedValue val Id: Long = -1
         , val name: String = ""
         , val state: String = ""
-        ,
+
+){
         @JsonManagedReference
         @OneToMany(fetch = FetchType.EAGER, mappedBy = "company")
-        var lecturers: List<Lecturer>? = ArrayList()
-)
+        var lecturers: MutableSet<Lecturer> = mutableSetOf()
+}

@@ -34,4 +34,11 @@ data class Lecture(
                 joinColumns = [(JoinColumn(name = "lecture_id", referencedColumnName = "id"))],
                 inverseJoinColumns = [(JoinColumn(name = "student_id", referencedColumnName = "id"))])
         val presentStudents: MutableSet<Student> = mutableSetOf()
+
+        @JsonManagedReference
+        @ManyToMany(cascade = [(CascadeType.ALL)], fetch = FetchType.EAGER)
+        @JoinTable(name = "assigned_lecturers",
+                joinColumns = [(JoinColumn(name = "lecture_id", referencedColumnName = "id"))],
+                inverseJoinColumns = [(JoinColumn(name = "lecturer_id", referencedColumnName = "id"))])
+        val lecturers: MutableSet<Lecturer> = mutableSetOf()
 }

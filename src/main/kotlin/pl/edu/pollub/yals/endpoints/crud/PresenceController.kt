@@ -17,7 +17,7 @@ class PresenceController(val lectureRepository: LectureRepository, val studentRe
     fun getPresencesForStudent(@PathVariable id: Long) = studentRepository.findById(id).flatMap { Optional.of(it.lecturesPresentAt) }
 
 
-    @PutMapping("/api/private/presences")
+    @PostMapping("/api/private/presences")
     fun setPresent(@RequestBody studentLecturePair: StudentLecturePair) {
         lectureRepository.findById(studentLecturePair.lectureId).ifPresent({
             val lecture = it

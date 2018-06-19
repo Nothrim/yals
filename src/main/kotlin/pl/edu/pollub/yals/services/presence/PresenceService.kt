@@ -17,7 +17,8 @@ class PresenceService(val lectureRepository: LectureRepository) {
         if (lecture.presentStudents.contains(student)) {
             throw AlreadyPresentAtLectureException("Student is already present at lecture")
         }
-        lecture.presentStudents.toHashSet().add(student)
+        lecture.presentStudents.add(student)
+        lecture.interestedStudents.remove(student)
         lectureRepository.save(lecture)
     }
 }
